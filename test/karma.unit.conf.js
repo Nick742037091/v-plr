@@ -10,7 +10,11 @@ module.exports = function(config) {
       '**/*.spec.js': ['webpack', 'sourcemap']
     },
     webpack: webpackConfig,
-    reporters: ['spec'],
+    reporters: ['spec', 'coverage'],
+    coverageReporter: {
+      dir: './coverage',
+      reporters: [{ type: 'lcov', subdir: '.' }, { type: 'text-summary' }]
+    },
     browsers: ['ChromeHeadless'],
     logLevel: config.LOG_INFO,
     client: {
