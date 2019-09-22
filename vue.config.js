@@ -15,10 +15,10 @@ module.exports = {
   publicPath: `/${outputDir}/`,
   outputDir,
   // 支持真机调试
-  devServer: {
-    proxy: 'http://localhost:8081',
-    public: '192.168.0.121:8081' // 本地ip
-  },
+  // devServer: {
+  //   proxy: 'http://localhost:8081',
+  //   public: '192.168.0.121:8081' // 本地ip
+  // },
   css: { extract: false },
   configureWebpack: {
     output: {
