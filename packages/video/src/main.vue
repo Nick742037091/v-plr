@@ -1,0 +1,164 @@
+<template>
+  <div class="video-wrapper" :style="wrapperStyle">
+    <div class="video-block">
+      <video ref="player" :src="src" webkit-playsinline="true" playsinline="true" />
+    </div>
+    <div v-if="$slots.default" class="slot-block">
+      <slot />
+    </div>
+
+    <controls
+      v-if="!$slots.default &&  !nativeControls"
+      :current-time="currentTime"
+      :duration="duration"
+      :buffered="buffered"
+      :is-playing="isPlaying"
+      :is-loading="isLoading"
+      :is-fullscreen="isFullscreen"
+      @togglePlay="togglePlay"
+      @toggleFullScreen="toggleFullScreen"
+      @changeTime="changeTime"
+      :title="title"
+    />
+  </div>
+</template>
+
+<script>
+import Controls from './controls'
+import { on, off } from '@/utils'
+import browser from '@/utils/browser'
+import { mediaEvents, videoEvents } from '@/utils/event'
+import fullscreen from '@/utils/fullscreen'
+
+export default {
+  name: 'VideoPlayer',
+  components: { Controls },
+  props: {
+    src: {
+      type: String,
+      default: ''
+    },
+    ratio: {
+      type: Number,
+      default: 16 / 9
+    },
+    title: {
+      type: String,
+      default: ''
+    }
+  },
+  data() {
+    return {
+      player: null,
+      isPlaying: false,
+      isLoading: false,
+      isFullscreen: false,
+      currentTime: 0,
+      duration: 0,
+      buffered: 0
+    }
+  },
+  computed: {
+    wrapperStyle() {
+      return {
+        paddingBottom: (1 / this.ratio) * 100 + '%'
+      }
+    },
+    playProgerss() {
+      if (this.duration === 0) return 0
+      return this.currentTime / this.duration
+    },
+    nativeControls() {
+      // 1.微信安卓video控件在播放之后会覆盖自定义控件，默认全屏播放
+      // 2.微信iOS video播放之后才能切换全屏
+      // 3.QQ浏览器video控件播放之后会覆盖自定义控件
+      return browser.isAndroid && browser.isWechat
+    }
+  },
+  mounted() {
+    const player = this.$refs['player']
+    this.player = player
+    on(this.player, mediaEvents.play, this.onPlay)
+    on(this.player, mediaEvents.playing, this.onPlaying)
+    on(this.player, mediaEvents.pause, this.onPause)
+    on(this.player, mediaEvents.timeupdate, this.onTimeupdate)
+    on(this.player, mediaEvents.loadstart, this.onLoadstart)
+    on(this.player, mediaEvents.waiting, this.onWaiting)
+    on(this.player, mediaEvents.suspend, this.onSuspend)
+    fullscreen.onChange(this.player, this.onFullscreenChange)
+  },
+  destroyed() {
+    off(this.player.mediaEvents.play, this.onPlay)
+    off(this.player.mediaEvents.pause, this.onPause)
+    off(this.player.mediaEvents.timeupdate, this.onTimeupdate)
+    fullscreen.offChange(this.player, this.onFullscreenChange)
+  },
+  methods: {
+    /* 原生回调事件 */
+    onPlay() {
+      this.isPlaying = true
+      this.$emit(videoEvents.onPlay)
+    },
+    onPlaying() {
+      this.isLoading = false
+    },
+    onPause() {
+      this.isPlaying = false
+      this.$emit(videoEvents.onPause)
+    },
+    onTimeupdate() {
+      this.duration = this.player.duration
+      this.currentTime = this.player.currentTime
+      this.buffered = this.player.buffered.end(0)
+    },
+    onLoadstart() {
+      console.log('onLoadstart')
+    },
+    onWaiting() {
+      this.isLoading = true
+    },
+    onFullscreenChange(event) {
+      console.log('onFullscreenChange:', event.isFullscreen)
+      this.isFullscreen = event.isFullscreen
+    },
+    /* 组件回调事件 */
+    togglePlay() {
+      if (!this.isPlaying) {
+        this.player.play()
+      } else {
+        this.player.pause()
+      }
+    },
+    async toggleFullScreen() {
+      fullscreen.toggle(this.player)
+    },
+    changeTime(time) {
+      //TODO 节流
+      this.player.currentTime = time
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.video-wrapper {
+  position: relative;
+  width: 100vw;
+  background-color: black;
+  .video-block {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    video {
+      width: 100%;
+    }
+  }
+  .slot-block {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+}
+</style>
