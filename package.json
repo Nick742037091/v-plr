@@ -17,7 +17,8 @@
     "build": "vue-cli-service build --target lib --name vue-player --dest lib --formats commonjs src/index.js",
     "lint": "vue-cli-service lint",
     "test:unit": "cross-env BABEL_ENV=test karma start test/unit/karma.unit.conf.js --single-run",
-    "coveralls": "cat test/unit/coverage/lcov.info | ./node_modules/.bin/coveralls"
+    "coveralls": "cat test/unit/coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "pub": "bash ./build/publish.sh"
   },
   "dependencies": {
     "core-js": "^2.6.5",

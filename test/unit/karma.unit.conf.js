@@ -7,7 +7,10 @@ module.exports = function(config) {
       'modules/**/*.spec.js' //test目录下，所有.spec.js结尾的测试文件
     ],
     preprocessors: {
-      '**/*.spec.js': ['webpack', 'sourcemap']
+      '**/*.spec.js': [
+        'webpack'
+        // 'sourcemap'
+      ]
     },
     webpack: webpackConfig,
     reporters: ['spec', 'coverage'],

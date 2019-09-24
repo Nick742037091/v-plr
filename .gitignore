@@ -3,6 +3,7 @@ node_modules
 dist
 v-plr
 coverage
+lib
 
 # local env files
 .env.local

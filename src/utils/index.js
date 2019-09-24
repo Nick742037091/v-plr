@@ -1,3 +1,7 @@
+import pkg from '../../package.json'
+export const appVersion = pkg.version
+export const isDev = process.env.NODE_ENV === 'development'
+
 export const on = (function() {
   if (document.addEventListener) {
     return function(element, event, handler) {
