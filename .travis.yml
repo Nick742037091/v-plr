@@ -8,13 +8,13 @@ before_install:
   # - sudo apt-get update
   # - sudo apt-get install sshpass
   - npm install
-  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then sh ./build/pre-build.sh; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then sh ./build/pre-build.sh; fi'
 script:
   - npm run test:unit
 after_script:
   - npm run coveralls
 after_success:
-  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then sh build/build.sh; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then sh build/build.sh; fi'
   # - npm run build:example
   # - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   # - docker build -t qq742037091/v-plr:latest .
