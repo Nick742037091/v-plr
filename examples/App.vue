@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <video-player src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" title="example"></video-player>
+    <video-player src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" title="video-player"></video-player>
   </div>
 </template>
 
