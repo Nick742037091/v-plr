@@ -20,6 +20,9 @@ module.exports = {
       libraryExport: 'default'
     }
   },
+  devServer: {
+    progress: false
+  },
   chainWebpack: config => {
     config.resolve.alias
       .set('@pkg', resolve('packages'))
