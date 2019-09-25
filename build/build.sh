@@ -1,4 +1,4 @@
-npm run build:example
+yarn build:example
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 docker build -t qq742037091/v-plr:latest .
 docker push qq742037091/v-plr:latest
