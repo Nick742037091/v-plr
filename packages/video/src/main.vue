@@ -17,7 +17,7 @@
       :is-fullscreen="isFullscreen"
       @togglePlay="togglePlay"
       @toggleFullScreen="toggleFullScreen"
-      @changeTime="changeTime"
+      @changeTime="toggleChangeTime"
       :title="title"
     />
   </div>
@@ -50,6 +50,7 @@ export default {
   data() {
     return {
       player: null,
+      isReady: false,
       isPlaying: false,
       isLoading: false,
       isFullscreen: false,
@@ -78,48 +79,61 @@ export default {
   mounted() {
     const player = this.$refs['player']
     this.player = player
+    on(this.player, mediaEvents.loadstart, this.onLoadstart)
+    on(this.player, mediaEvents.loadedmetadata, this.onLoadedmetadata)
     on(this.player, mediaEvents.play, this.onPlay)
     on(this.player, mediaEvents.playing, this.onPlaying)
     on(this.player, mediaEvents.pause, this.onPause)
     on(this.player, mediaEvents.timeupdate, this.onTimeupdate)
-    on(this.player, mediaEvents.loadstart, this.onLoadstart)
     on(this.player, mediaEvents.waiting, this.onWaiting)
     on(this.player, mediaEvents.suspend, this.onSuspend)
     fullscreen.onChange(this.player, this.onFullscreenChange)
   },
   destroyed() {
-    off(this.player.mediaEvents.play, this.onPlay)
-    off(this.player.mediaEvents.pause, this.onPause)
-    off(this.player.mediaEvents.timeupdate, this.onTimeupdate)
+    off(this.player, mediaEvents.play, this.onPlay)
+    off(this.player, mediaEvents.playing, this.onPlaying)
+    off(this.player, mediaEvents.pause, this.onPause)
+    off(this.player, mediaEvents.timeupdate, this.onTimeupdate)
+    off(this.player, mediaEvents.loadstart, this.onLoadstart)
+    off(this.player, mediaEvents.waiting, this.onWaiting)
+    off(this.player, mediaEvents.suspend, this.onSuspend)
     fullscreen.offChange(this.player, this.onFullscreenChange)
   },
   methods: {
     /* 原生回调事件 */
+    onLoadstart() {
+      this.$emit(videoEvents.onLoadstart)
+    },
+    onLoadedmetadata() {
+      this.isReady = true
+      this.$emit(videoEvents.onLoadedmetadata)
+    },
     onPlay() {
       this.isPlaying = true
       this.$emit(videoEvents.onPlay)
     },
     onPlaying() {
       this.isLoading = false
+      this.$emit(videoEvents.onPlaying)
     },
     onPause() {
       this.isPlaying = false
       this.$emit(videoEvents.onPause)
     },
     onTimeupdate() {
-      this.duration = this.player.duration
-      this.currentTime = this.player.currentTime
-      this.buffered = this.player.buffered.end(0)
-    },
-    onLoadstart() {
-      console.log('onLoadstart')
+      const duration = (this.duration = this.player.duration)
+      const currentTime = (this.currentTime = this.player.currentTime)
+      const buffered = (this.buffered = this.player.buffered.end(0))
+      this.$emit(videoEvents.onTimeupdate, { duration, currentTime, buffered })
     },
     onWaiting() {
       this.isLoading = true
+      this.$emit(videoEvents.onWaiting)
     },
     onFullscreenChange(event) {
       console.log('onFullscreenChange:', event.isFullscreen)
       this.isFullscreen = event.isFullscreen
+      this.$emit(videoEvents.onFullscreenChange, event)
     },
     /* 组件回调事件 */
     togglePlay() {
@@ -132,7 +146,7 @@ export default {
     async toggleFullScreen() {
       fullscreen.toggle(this.player)
     },
-    changeTime(time) {
+    toggleChangeTime(time) {
       //TODO 节流
       this.player.currentTime = time
     }
@@ -143,13 +157,14 @@ export default {
 <style lang="scss" scoped>
 .video-wrapper {
   position: relative;
-  width: 100vw;
+  width: 100%;
   background-color: black;
   .video-block {
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
+    z-index: 0;
     video {
       width: 100%;
     }
@@ -159,6 +174,8 @@ export default {
     left: 0;
     right: 0;
     top: 0;
+    bottom: 0;
+    z-index: 1;
   }
 }
 </style>

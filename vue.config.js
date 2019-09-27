@@ -3,7 +3,6 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
-const outputDir = 'v-plr'
 module.exports = {
   pages: {
     index: {
@@ -12,8 +11,8 @@ module.exports = {
       filename: 'index.html'
     }
   },
-  publicPath: `/${outputDir}/`,
-  outputDir,
+  publicPath: `/v-plr/`,
+  outputDir: 'dist-example',
   css: { extract: false },
   configureWebpack: {
     output: {
@@ -26,7 +25,7 @@ module.exports = {
   chainWebpack: config => {
     config.resolve.alias
       .set('@pkg', resolve('packages'))
-      .set('@examples', resolve('examples'))
+      .set('@example', resolve('examples'))
     // 使图片转为base64
     config.module
       .rule('images')

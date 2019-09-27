@@ -27,6 +27,12 @@ export const mediaEvents = {
 
 // 视频组件事件
 export const videoEvents = {
+  onLoadstart: 'onLoadstart',
+  onLoadedmetadata: 'onLoadedmetadata',
   onPlay: 'onPlay',
-  onPause: 'onPause'
+  onPause: 'onPause',
+  onPlaying: 'onPlaying',
+  onTimeupdate: 'onTimeupdate',
+  onWaiting: 'onWaiting',
+  onFullscreenChange: 'onFullscreenChange'
 }

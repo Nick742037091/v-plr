@@ -4,7 +4,9 @@
 
 ## Install
 
-`$ npm install v-plr or yarn add v-plr`
+> $ npm install v-plr
+
+> $ yarn add v-plr
 
 ## Quick Start
 

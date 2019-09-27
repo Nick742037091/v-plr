@@ -1,5 +1,5 @@
 <template>
-  <div ref="slider" class="slider" @click="onClickSlider" :style="sliderStyle">
+  <div ref="slider" class="slider" @click.stop="onClickSlider" :style="sliderStyle">
     <slider-button v-model="btnValue" :sliderSize="sliderSize" :min="min" :max="max" />
     <div class="progress-seek" :style="seekStyle" />
     <div class="progress-played" :style="playedStyle" />

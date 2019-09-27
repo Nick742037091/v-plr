@@ -44,15 +44,9 @@
 <script>
 import Slider from '@pkg/slider'
 import { HalfCircleSpinner as Spinner } from 'epic-spinners'
+import { mediaTime } from '@/utils'
 
 const HIDE_TIME = 1000
-const addZero = number => {
-  if (number < 10) {
-    return '0' + number
-  } else {
-    return '' + number
-  }
-}
 
 export default {
   name: 'VideoControls',
@@ -113,21 +107,7 @@ export default {
     }
   },
   filters: {
-    mediaTime(time) {
-      time = Math.ceil(time)
-      const aHour = 60 * 60
-      const aMinute = 60
-      const hour = addZero(Math.floor(time / aHour))
-      const minute = addZero(Math.floor((time % aHour) / aMinute))
-      const second = addZero(Math.floor(time % aMinute))
-      if (Math.floor(time / aHour) > 0) {
-        return `${hour}:${minute}:${second}`
-      } else if (Math.floor(time / aMinute) > 0) {
-        return `${minute}:${second}`
-      } else {
-        return '00:' + addZero(time)
-      }
-    }
+    mediaTime
   },
   destroyed() {
     this.clearHideTimer()
