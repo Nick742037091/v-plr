@@ -17,4 +17,8 @@ cache:
   yarn: true
   directories:
     - node_modules
-    - nvm
+branches:
+  only:
+    - master
+    - develop
+    - /^feature/.*$/
