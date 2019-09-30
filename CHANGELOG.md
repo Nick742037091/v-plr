@@ -1,3 +1,7 @@
+## [0.2.5](https://github.com/Nick742037091/v-plr/compare/v0.2.4...v0.2.5) (2019-09-30)
+
+
+
 ## [0.2.4](https://github.com/Nick742037091/v-plr/compare/v0.2.3...v0.2.4) (2019-09-30)
 
 
