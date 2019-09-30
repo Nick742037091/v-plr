@@ -18,7 +18,7 @@
     "lint": "vue-cli-service lint",
     "test:unit": "cross-env BABEL_ENV=test karma start test/unit/karma.unit.conf.js --single-run",
     "coveralls": "cat test/unit/coverage/lcov.info | ./node_modules/.bin/coveralls",
-    "pub": "bash ./build/publish.sh",
+    "pub": "bash ./build/git-release.sh && bash ./build/publish.sh",
     "commit": "git-cz",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },

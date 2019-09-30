@@ -12,6 +12,7 @@ then
   # add commit
   npm version $VERSION --message "[release] $VERSION"
 
+
   # change changelog
   npm run changelog
 

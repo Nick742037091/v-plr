@@ -64,3 +64,7 @@ export default {
 | onEnded            | Fires when media is ended                        | None                                |
 | onError            | Fires when a error happen                        | None                                |
 | onFullscreenChange | Fires when the fullscreen status changed         | { isFullscreen }                    |
+
+
+# Changelog
+### Detailed changes for each release are documented in the [release notes](https://github.com/Nick742037091/v-plr/releases).
