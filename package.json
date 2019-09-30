@@ -1,6 +1,6 @@
 {
   "name": "v-plr",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "license": "MIT",
   "author": "nick h",
   "main": "lib/vue-player.common.js",
