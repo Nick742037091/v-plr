@@ -80,23 +80,25 @@ export default {
     const player = this.$refs['player']
     this.player = player
     on(this.player, mediaEvents.loadstart, this.onLoadstart)
-    on(this.player, mediaEvents.loadedmetadata, this.onLoadedmetadata)
+    on(this.player, mediaEvents.canplay, this.onCanplay)
     on(this.player, mediaEvents.play, this.onPlay)
     on(this.player, mediaEvents.playing, this.onPlaying)
     on(this.player, mediaEvents.pause, this.onPause)
     on(this.player, mediaEvents.timeupdate, this.onTimeupdate)
     on(this.player, mediaEvents.waiting, this.onWaiting)
-    on(this.player, mediaEvents.suspend, this.onSuspend)
+    on(this.player, mediaEvents.ended, this.onEnded)
+    on(this.player, mediaEvents.error, this.onError)
     fullscreen.onChange(this.player, this.onFullscreenChange)
   },
   destroyed() {
+    off(this.player, mediaEvents.loadstart, this.onLoadstart)
     off(this.player, mediaEvents.play, this.onPlay)
     off(this.player, mediaEvents.playing, this.onPlaying)
     off(this.player, mediaEvents.pause, this.onPause)
     off(this.player, mediaEvents.timeupdate, this.onTimeupdate)
-    off(this.player, mediaEvents.loadstart, this.onLoadstart)
     off(this.player, mediaEvents.waiting, this.onWaiting)
-    off(this.player, mediaEvents.suspend, this.onSuspend)
+    off(this.player, mediaEvents.ended, this.onEnded)
+    off(this.player, mediaEvents.error, this.onError)
     fullscreen.offChange(this.player, this.onFullscreenChange)
   },
   methods: {
@@ -104,9 +106,9 @@ export default {
     onLoadstart() {
       this.$emit(videoEvents.onLoadstart)
     },
-    onLoadedmetadata() {
+    onCanplay() {
       this.isReady = true
-      this.$emit(videoEvents.onLoadedmetadata)
+      this.$emit(videoEvents.onCanplay)
     },
     onPlay() {
       this.isPlaying = true
@@ -130,8 +132,13 @@ export default {
       this.isLoading = true
       this.$emit(videoEvents.onWaiting)
     },
+    onEnded() {
+      this.$emit(videoEvents.onEnded)
+    },
+    onError() {
+      this.$emit(videoEvents.onError)
+    },
     onFullscreenChange(event) {
-      console.log('onFullscreenChange:', event.isFullscreen)
       this.isFullscreen = event.isFullscreen
       this.$emit(videoEvents.onFullscreenChange, event)
     },

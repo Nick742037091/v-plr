@@ -5,11 +5,11 @@
   "author": "nick h",
   "main": "lib/vue-player.common.js",
   "keyword": "vue video audio player",
-  "description": "vue player",
+  "description": "v-pr",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/Nick742037091/vue-player"
+    "url": "https://github.com/Nick742037091/v-plr.git"
   },
   "scripts": {
     "serve": "vue-cli-service serve",

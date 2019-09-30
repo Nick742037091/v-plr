@@ -9,7 +9,7 @@
         ref="custom-player"
         src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"
         @onLoadstart="onLoadstart"
-        @onLoadedmetadata="onLoadedmetadata"
+        @onCanplay="onCanplay"
         @onPlay="onPlay"
         @onPause="onPause"
         @onPlaying="onPlaying"
@@ -117,7 +117,7 @@ export default {
     },
     //vido-player 组件回调
     onLoadstart() {},
-    onLoadedmetadata() {
+    onCanplay() {
       this.isReady = true
     },
     onPlay() {
@@ -143,6 +143,7 @@ export default {
     },
     // 自定义组件回调
     async onTogglePanel() {
+      if (!this.isReady) return
       this.clearHideTimer()
       this.showControls = !this.showControls
       await this.$nextTick()
