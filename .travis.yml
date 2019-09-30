@@ -7,7 +7,6 @@ services:
 install:
   - yarn
 script:
-  - yarn lint
   - yarn test:unit
 after_success:
   - 'if [ "$TRAVIS_BRANCH" = "master" ]; then yarn coveralls; fi'
