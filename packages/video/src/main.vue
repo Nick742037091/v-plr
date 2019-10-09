@@ -31,7 +31,7 @@ import { mediaEvents, videoEvents } from '@/utils/event'
 import fullscreen from '@/utils/fullscreen'
 
 export default {
-  name: 'VideoPlayer',
+  name: 'VVideo',
   components: { Controls },
   props: {
     src: {

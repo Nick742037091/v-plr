@@ -29,7 +29,7 @@ then
   git push upstream develop
 
 # build
-  npm run build
+  npm run build:lib
 
   # publish
   npm publish

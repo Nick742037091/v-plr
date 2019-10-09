@@ -1,13 +1,15 @@
-import Video from '@pkg/video'
+import VVideo from '@pkg/video'
+import VSlider from '@pkg/slider'
 import pkg from '../package.json'
 
 const install = function(Vue) {
-  Vue.component(Video.name, Video)
+  Vue.component(VSlider.name, VSlider)
+  Vue.component(VVideo.name, VVideo)
 }
 const version = pkg.version
 export default {
   install,
-  version,
-  // 支持通过babel-plugin-component 进行单独导出
-  Video
+  version
 }
+
+export { VSlider, VVideo }

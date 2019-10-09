@@ -1,6 +1,13 @@
 <template>
   <div ref="slider" class="slider" @click.stop="onClickSlider" :style="sliderStyle">
-    <slider-button v-model="btnValue" :sliderSize="sliderSize" :min="min" :max="max" />
+    <slider-button
+      v-model="btnValue"
+      :sliderSize="sliderSize"
+      :min="min"
+      :max="max"
+      :border-width="btnBorderWidth"
+      :border-color="btnBorderColor"
+    />
     <div class="progress-seek" :style="seekStyle" />
     <div class="progress-played" :style="playedStyle" />
     <div class="progress-buffered" :style="bufferedStyle" />
@@ -52,6 +59,14 @@ export default {
     progerssHeight: {
       type: Number,
       default: 3
+    },
+    btnBorderWidth: {
+      type: Number,
+      default: 2
+    },
+    btnBorderColor: {
+      type: String,
+      default: 'grey'
     }
   },
   components: { SliderButton },

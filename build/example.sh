@@ -5,12 +5,12 @@ if [ "$TRAVIS_BRANCH" = "develop" -o "$TRAVIS_BRANCH" = "master" ]; then
   echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 fi
 if [ "$TRAVIS_BRANCH" = "develop" ]; then
-  docker build -t qq742037091/v-plr-test:latest .
-  docker push qq742037091/v-plr-test:latest
-  sshpass -p $ALI_CLOUD_PASSWORD ssh -o stricthostkeychecking=no $ALI_CLOUD_USER "cd /var/project/v-plr/test && ./docker-update.sh "
+  docker build -t $DOCKER_IMG_TEST .
+  docker push $DOCKER_IMG_TEST
+  sshpass -p $ALI_CLOUD_PASSWORD ssh -o stricthostkeychecking=no $ALI_CLOUD_USER "cd $SERVER_TEST_PATH && ./docker-update.sh "
 fi
 if [ "$TRAVIS_BRANCH" = "master" ]; then
-  docker build -t qq742037091/v-plr:latest .
-  docker push qq742037091/v-plr:latest
-  sshpass -p $ALI_CLOUD_PASSWORD ssh -o stricthostkeychecking=no $ALI_CLOUD_USER "cd /var/project/v-plr/prod && ./docker-update.sh "
+  docker build -t $DOCKER_IMG_PROD .
+  docker push $DOCKER_IMG_PROD
+  sshpass -p $ALI_CLOUD_PASSWORD ssh -o stricthostkeychecking=no $ALI_CLOUD_USER "cd $SERVER_PROD_PATH && ./docker-update.sh "
 fi

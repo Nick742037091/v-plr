@@ -16,23 +16,22 @@
 # Quick Start
 
 ```
-
 <template>
-  <video-player src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" :title="default controllers">
-  <video-player src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" 
+  <v-video src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" title="default controllers">
+  <v-video src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" 
     @onPlay="onPlay" @onPause="onPause" @onTimeupdate="onTimeupdate">
     <!--  add custom controllers here to cover default controllers -->
-  </video-player>
+  </v-video>
 </template>
 
 <script>
-import VideoPlayer from 'v-plr'
-Vue.use(VideoPlayer)
+import VVideo from 'v-plr'
+Vue.use(VVideo)
 export default {
   //...
   methods:{
     onPlay(){},
-    onPause(){}
+    onPause(){},
     onTimeupdate({ duration, currentTime, buffered }){}
   }
 }
@@ -40,17 +39,38 @@ export default {
 
 ```
 
+# Use Component
+## Slider
+```
+<template>
+  <v-slider v-model="curVal" width="400px" />
+</template>
+
+<script>
+import { VSlider } from 'v-plr'
+export default {
+  //...
+  data() {
+    return { curVal: 50 }
+  },
+  components: { VSlider },
+  methods: {}
+}
+</script>
+
+```
+
 # Documentation
+## VVideo
+### Props
 
-## Props
+| Props | Description                                | Type   | Default | Required |
+| ----- | ------------------------------------------ | ------ | ------- | -------- |
+| src   | The  url of video.                         | String | ''      | true     |
+| ratio | The ratio of the video's width and height. | Number | 16 / 9  | false    |
+| title | The title of the default controllers.      | String | ''      | false    |
 
-| Props | Description                                 | Type   | Default | Required |
-| ----- | ------------------------------------------- | ------ | ------- | -------- |
-| src   | Ther  url of video.                         | String | ''      | true     |
-| ratio | Ther ratio of the video's width and height. | Number | 16 / 9  | false    |
-| title | Ther title of the default controllers.      | String | ''      | false    |
-
-## Events
+### Events
 
 | Events             | Description                                      | Params                              |
 | ------------------ | ------------------------------------------------ | ----------------------------------- |
@@ -64,6 +84,30 @@ export default {
 | onEnded            | Fires when media is ended                        | None                                |
 | onError            | Fires when a error happen                        | None                                |
 | onFullscreenChange | Fires when the fullscreen status changed         | { isFullscreen }                    |
+
+## VSlider
+### Props
+
+| Props          | Description                                                      | Type          | Default    | Required |
+| -------------- | ---------------------------------------------------------------- | ------------- | ---------- | -------- |
+| min            | The minimun value of slider.                                     | Number        | 0          | false    |
+| max            | The maximum value of slider.                                     | Number        | 100        | false    |
+| value          | The current value of slider.                                     | Number        | 50         | false    |
+| height         | The height of slider block.                                      | Number/String | 40(px)     | false    |
+| width          | The width of slider block.                                       | Number/String | 100%       | false    |
+| buffered       | The value of slider buffered.                                    | Number        | 0(min~max) | false    |
+| seekColor      | The background color of dragging block.                          | String        | #eeeeee    | false    |
+| playedColor    | The background color of the area between min and current value.  | String        | #ffe411    | false    |
+| bufferedColor  | The background color of the area between min and buffered value. | String        | #cfcfcf    | false    |
+| progerssHeight | The height of the slider display block.                          | Number        | 3(px)      | false    |
+| btnBorderWidth | The border width of the slider button                            | Number        | 2(px)      | false    |
+| btnBorderColor | The border color of the slider button                            | String        | grey       | false    |
+
+### Events
+
+| Events      | Description                                                  | Params |
+| ----------- | ------------------------------------------------------------ | ------ |
+| changeValue | Fires when the current value changed by manual manipulation. | value  |
 
 
 # Changelog

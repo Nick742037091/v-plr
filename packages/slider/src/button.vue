@@ -31,6 +31,14 @@ export default {
       type: Number,
       default: 0
     },
+    borderWidth: {
+      type: Number,
+      default: 2
+    },
+    borderColor: {
+      type: String,
+      default: 'grey'
+    },
     min: {
       type: Number,
       default: 0
@@ -77,7 +85,9 @@ export default {
       return {
         width,
         height,
-        backgroundColor: this.color
+        backgroundColor: this.color,
+        borderWidth: `${this.borderWidth}px`,
+        borderColor: this.borderColor
       }
     },
     currentPosition() {
@@ -155,9 +165,9 @@ export default {
   padding: 10px 10px;
   .slider-button {
     border-radius: 50%;
-    border-width: 2px;
+    // border-width: 2px;
     border-style: solid;
-    border-color: white;
+    // border-color: white;
   }
   .slider-button--hover {
     transform: scale(1.4);

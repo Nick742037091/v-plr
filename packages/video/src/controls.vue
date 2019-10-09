@@ -21,6 +21,7 @@
         <slider
           v-model="sliderValue"
           :buffered="sliderBuffered"
+          btn-border-color="white"
           class="slider"
           @changeValue="onChangeValue"
         />

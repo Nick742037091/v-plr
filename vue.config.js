@@ -2,23 +2,29 @@ const path = require('path')
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
+let config = {}
+const mode = process.env.MODE
+if (mode === 'example') {
+  config = {
+    pages: {
+      index: {
+        entry: 'examples/main.js',
+        template: 'public/index.html',
+        filename: 'index.html'
+      }
+    },
+    outputDir: 'dist-example'
+  }
+} else if (mode === 'lib') {
+  config = {
+    outputDir: 'lib'
+  }
+}
 
 module.exports = {
-  pages: {
-    index: {
-      entry: 'examples/main.js',
-      template: 'public/index.html',
-      filename: 'index.html'
-    }
-  },
+  ...config,
   publicPath: `/v-plr/`,
-  outputDir: 'dist-example',
   css: { extract: false },
-  configureWebpack: {
-    output: {
-      libraryExport: 'default'
-    }
-  },
   devServer: {
     progress: false
   },
