@@ -1,6 +1,6 @@
 {
   "name": "v-plr",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "license": "MIT",
   "author": "nick h",
   "main": "lib/v-plr.common.js",
