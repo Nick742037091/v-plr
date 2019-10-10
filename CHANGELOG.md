@@ -1,3 +1,12 @@
+## [0.2.7](https://github.com/Nick742037091/v-plr/compare/v0.2.6...v0.2.7) (2019-10-10)
+
+
+### Features
+
+* add type files ([cc9d1ee](https://github.com/Nick742037091/v-plr/commit/cc9d1ee))
+
+
+
 ## [0.2.6](https://github.com/Nick742037091/v-plr/compare/v0.2.5...v0.2.6) (2019-10-09)
 
 
