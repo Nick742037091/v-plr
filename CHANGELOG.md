@@ -1,3 +1,12 @@
+## [0.2.8](https://github.com/Nick742037091/v-plr/compare/v0.2.7...v0.2.8) (2019-10-10)
+
+
+### Bug Fixes
+
+* fix event.t.ds file ([1cf7229](https://github.com/Nick742037091/v-plr/commit/1cf7229))
+
+
+
 ## [0.2.7](https://github.com/Nick742037091/v-plr/compare/v0.2.6...v0.2.7) (2019-10-10)
 
 
