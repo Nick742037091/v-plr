@@ -1,28 +1,22 @@
 {
   "name": "v-plr",
   "version": "0.2.8",
-  "license": "MIT",
-  "author": "nick h",
-  "main": "lib/v-plr.common.js",
-  "keyword": "vue video audio player",
-  "description": "v-pr",
   "private": false,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Nick742037091/v-plr.git"
-  },
-  "typings": "types/index.d.ts",
+  "description": "v-pr",
+  "author": "nick h",
   "scripts": {
     "serve": "vue-cli-service serve --mode development --open",
+    "lint": "vue-cli-service lint",
     "build:example": "vue-cli-service build --mode example",
     "build:lib": "vue-cli-service build --mode lib --target lib  --formats commonjs src/index.js",
-    "lint": "vue-cli-service lint",
-    "test:unit": "cross-env BABEL_ENV=test karma start test/unit/karma.unit.conf.js --single-run",
-    "coveralls": "cat test/unit/coverage/lcov.info | ./node_modules/.bin/coveralls",
-    "pub": "bash ./build/git-release.sh && bash ./build/publish.sh",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "commit": "git-cz",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+    "coveralls": "cat tests/unit/coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "pub": "bash ./build/git-release.sh && bash ./build/publish.sh",
+    "test:e2e": "vue-cli-service test:e2e --mode development",
+    "test:unit": "cross-env BABEL_ENV=test karma start tests/unit/karma.unit.conf.js --single-run"
   },
+  "main": "lib/v-plr.common.js",
   "dependencies": {
     "core-js": "^2.6.5",
     "lodash": "^4.17.15",
@@ -31,7 +25,9 @@
     "vue": "^2.6.10"
   },
   "devDependencies": {
+    "@cypress/webpack-preprocessor": "^4.1.0",
     "@vue/cli-plugin-babel": "^3.11.0",
+    "@vue/cli-plugin-e2e-cypress": "^3.12.0",
     "@vue/cli-plugin-eslint": "^3.11.0",
     "@vue/cli-service": "^3.11.0",
     "@vue/test-utils": "^1.0.0-beta.29",
@@ -90,21 +86,28 @@
     "> 1%",
     "last 2 versions"
   ],
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
   },
+  "keyword": "vue video audio player",
+  "license": "MIT",
   "lint-staged": {
     "src/**/*.{js,vue}": [
       "npm run lint",
       "git add"
     ]
   },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nick742037091/v-plr.git"
   },
-  "standard-version": {}
+  "standard-version": {},
+  "typings": "types/index.d.ts"
 }

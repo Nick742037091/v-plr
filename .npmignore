@@ -1,4 +1,4 @@
 .vscode/
 v-plr/
-test/unit/coverage
+tests/unit/coverage
 package-lock.json
