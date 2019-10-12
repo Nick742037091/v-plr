@@ -15,8 +15,8 @@
         <img v-if="isPlaying" src="@/assets/img/pause.png" class="btn-pause" @click="togglePlay" />
         <img v-else src="@/assets/img/play.png" class="btn-play" @click="togglePlay" />
         <span class="time-block">
-          <span>{{currentTime | mediaTime}}</span>/
-          <span>{{duration | mediaTime}}</span>
+          <span id="currentTime">{{currentTime | mediaTime}}</span>/
+          <span id="duration">{{duration | mediaTime}}</span>
         </span>
         <slider
           v-model="sliderValue"
@@ -34,7 +34,7 @@
         <img
           v-else
           src="@/assets/img/fullscreen-exit.png"
-          class="btn-fullscreen"
+          class="btn-fullscreen-exit"
           @click="toggleFullScreen"
         />
       </div>
@@ -187,7 +187,8 @@ export default {
     bottom: 0;
     .btn-play,
     .btn-pause,
-    .btn-fullscreen {
+    .btn-fullscreen,
+    .btn-fullscreen-exit {
       width: 15px;
       height: 15px;
       padding: 10px;
