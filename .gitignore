@@ -4,7 +4,7 @@ dist
 dist-example/*
 coverage
 lib
-test/e2e/videos/*
+tests/e2e/videos/*
 
 # local env files
 .env.local
