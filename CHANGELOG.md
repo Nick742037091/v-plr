@@ -1,3 +1,12 @@
+## [0.2.10](https://github.com/Nick742037091/v-plr/compare/v0.2.9...v0.2.10) (2019-10-14)
+
+
+### Bug Fixes
+
+* fix test:unit command bug ([27ed853](https://github.com/Nick742037091/v-plr/commit/27ed853))
+
+
+
 ## [0.2.9](https://github.com/Nick742037091/v-plr/compare/v0.2.8...v0.2.9) (2019-10-14)
 
 
