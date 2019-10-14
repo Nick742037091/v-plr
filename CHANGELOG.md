@@ -1,3 +1,12 @@
+## [0.2.9](https://github.com/Nick742037091/v-plr/compare/v0.2.8...v0.2.9) (2019-10-14)
+
+
+### Features
+
+* add e2e test ([ba50fdf](https://github.com/Nick742037091/v-plr/commit/ba50fdf))
+
+
+
 ## [0.2.8](https://github.com/Nick742037091/v-plr/compare/v0.2.7...v0.2.8) (2019-10-10)
 
 
@@ -37,11 +46,7 @@
 
 
 
-## [0.2.2](https://github.com/Nick742037091/v-plr/compare/v0.2.0...v0.2.2) (2019-09-27)
-
-
-
-# 0.2.0 (2019-09-26)
+## 0.2.2 (2019-09-27)
 
 
 
